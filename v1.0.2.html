@@ -746,10 +746,7 @@
             var colors = {}
             var level = {};
             
-            $(function(){
-                
-                var imgurClientId = '9db53e5936cd02f';
-                
+            $(function(){                
                 inputKinks = {
                     $columns: [],
                     createCategory: function(name, fields){
@@ -1113,33 +1110,6 @@
                                 inputKinks.drawCallHandlers[drawCall.type](context, drawCall);
                             }
                         }
-                        
-                        //return $(canvas).insertBefore($('#InputList'));
-                        
-                        // Send canvas to imgur
-                        $.ajax({
-                            url: 'https://api.imgur.com/3/image',
-                            type: 'POST',
-                            headers: {
-                                // Your application gets an imgurClientId from Imgur
-                                Authorization: 'Client-ID ' + imgurClientId,
-                                Accept: 'application/json'
-                            },
-                            data: {
-                                // convert the image data to base64
-                                image:  canvas.toDataURL().split(',')[1],
-                                type: 'base64'
-                            },
-                            success: function(result) {
-                                $('#Loading').hide();
-                                var url = 'https://i.imgur.com/' + result.data.id + '.png';
-                                $('#URL').val(url).fadeIn();
-                            },
-                            fail: function(){
-                                $('#Loading').hide();
-                                alert('Failed to upload to imgur, could not connect');
-                            }
-                        });
                     },
                     encode: function(base, input){
                         var hashBase = inputKinks.hashChars.length;
