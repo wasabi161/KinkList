@@ -1110,6 +1110,15 @@
                                 inputKinks.drawCallHandlers[drawCall.type](context, drawCall);
                             }
                         }
+
+                        // Trigger download
+                        var link = document.createElement('a');
+                        link.download = 'kinklist' + (username ? '_' + username.replace(/[()]/g, '') : '') + '.png';
+                        link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                        link.click();
+                        link.remove();
+                        
+                        $('#Loading').hide();
                     },
                     encode: function(base, input){
                         var hashBase = inputKinks.hashChars.length;
